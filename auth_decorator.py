@@ -21,8 +21,10 @@ def authorize(f):
             return f(user, *args, **kwargs)            
     return auth_required
 
-@app.route('/api/create', methods=['POST'])
+@app.route('/api/health', methods=["GET", "POST"])
 @authorize
-def create(user):
-    data = json.loads(request.data)
+def health():
+    return jsonify({"message": "System up and running"}), 200
    
+if __name == "__main__":
+    app.run()
